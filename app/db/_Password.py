@@ -16,7 +16,7 @@ class _Password:
         hash_object = hashlib.sha256(password.encode())
         return hash_object.hexdigest()
     
-    def _verify_password(self, password_entry: str) -> bool:
+    def verify_password(self, password_entry: str) -> bool:
         password_entry_hash = self.__hash_password__(password_entry)
         return self.password == password_entry_hash
     

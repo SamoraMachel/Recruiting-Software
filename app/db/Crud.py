@@ -2,7 +2,7 @@ from os import getenv
 from typing import List
 from app.db import create_db
 from dotenv import load_dotenv
-from abc import ABC
+from abc import ABC, abstractmethod
 import json
 
 
@@ -20,9 +20,10 @@ class Crud:
         data = self.database.search_by_value(self.schema, self.tablename, "id", "*")
         return data
     
-    # @ABC
-    # def retrieveRecord(cls, ids : List[str]):
-    #     record = cls.database.search_by_hash(cls.schema, cls.tablename, ids)
+    @classmethod
+    def retrieveSpecificRecords(cls, ids : List[str]):
+        record = cls.database.search_by_hash(cls.schema, cls.tablename, ids)
+        return record
     
     def insert(self):
         self.database.insert(self.schema, self.tablename, self.toArray())
@@ -38,3 +39,11 @@ class Crud:
     
     def toArray(self):
         return [self.__dict__]
+    
+    @classmethod
+    def toClassObject(cls, data: dict):
+        instance = Crud.__new__(cls)
+        for key in data:
+            setattr(instance, key, data[key])
+    
+        return instance

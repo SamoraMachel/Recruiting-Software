@@ -8,7 +8,6 @@ class Company(Crud, _Password):
     
     company_name : str
     email : str
-    password : str 
     location : str = None
     website: str = None
     social_media : str = None
