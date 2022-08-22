@@ -9,6 +9,7 @@ class Employee(Crud, _Password):
     
     name : str
     email: str
+    profession: str
     photo: str = None
     skills: List[str] = None
     education: List[dict] = None  # {"Undergraduate": {"Institution": "", "CertificateName":"", "CertificateFile":"", "StartYear":"", "EndYear":""}}
