@@ -1,7 +1,10 @@
 from os import getenv
+from typing import List
 from app.db import create_db
 from dotenv import load_dotenv
+from abc import ABC
 import json
+
 
 load_dotenv()
 
@@ -17,6 +20,10 @@ class Crud:
         data = self.database.search_by_value(self.schema, self.tablename, "id", "*")
         return data
     
+    # @ABC
+    # def retrieveRecord(cls, ids : List[str]):
+    #     record = cls.database.search_by_hash(cls.schema, cls.tablename, ids)
+    
     def insert(self):
         self.database.insert(self.schema, self.tablename, self.toArray())
         
@@ -25,9 +32,6 @@ class Crud:
     
     def delete(self):
         self.database.delete(self.schema, self.tablename, self.id)
-        
-    def toJson(self):
-        return json.dumps(self, default=lambda o: o.__dict__)
     
     def displayJson(self):
         return json.dumps(self, default=lambda o: o.__dict__, indent=4)

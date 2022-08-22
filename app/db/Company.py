@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 from app.db.Crud import Crud
-import hashlib
+from app.db._Password import _Password
 
 @dataclass
-class Company(Crud):
+class Company(Crud, _Password):
     tablename = "Company"
     
     company_name : str
@@ -13,14 +13,5 @@ class Company(Crud):
     website: str = None
     social_media : str = None
     
-    def __hash_password(self, password: str):
-        hash_object = hashlib.sha256(password.encode())
-        return hash_object.hexdigest()
-    
-    def _verify_password(self, password_entry: str) -> bool:
-        password_entry_hash = self.__hash_password(password_entry)
-        return self.password == password_entry_hash
-    
-    def toArray(self):
-        self.password = self.__hash_password(self.password)
-        return super().toArray()
+    def set_password(self, password: str):
+        self._password = password
