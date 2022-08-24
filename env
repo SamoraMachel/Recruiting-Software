@@ -2,3 +2,10 @@ HARPER_URL=
 HARPER_USERNAME=
 HARPER_PASSWORD=
 HARPER_SCHEMA=
+
+# Email setup 
+GMAIL_LINK_SETUP=ttps://myaccount.google.com/apppasswords
+EMAIL_PORT=465
+EMAIL_SERVER=smtp.gmail.com
+SENDER_EMAIL=
+EMAIL_PASSWORD=
