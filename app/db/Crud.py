@@ -16,8 +16,14 @@ class Crud:
     def checkTableName(self):
         return self.tablename
 
-    def read(self):
-        data = self.database.search_by_value(self.schema, self.tablename, "id", "*")
+    @classmethod
+    def read(cls, attributes=["*"]) :
+        data = cls.database.search_by_value(cls.schema, cls.tablename, "id", attributes)
+        return data
+    
+    @classmethod
+    def readByValue(cls, field, attributes=["*"]):
+        data = cls.database.search_by_value(cls.schema, cls.tablename, field, attributes)
         return data
     
     @classmethod
